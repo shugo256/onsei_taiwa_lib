@@ -13,7 +13,22 @@ class AngrySiri(ReplAICommunicater):
         self.score = 0
         self.mode = NORMAL_MODE
 
-    def update(self, happy_cnt=0, angry_cnt=0):
+
+    def talk(self, message, happy_cnt=0, angry_cnt=0):
+        '''
+        messageを送信しつつ、スコアを更新し、必要に応じてモードを変える
+        返答文章のリストを返す
+        '''
+        dia_resp = super(AngrySiri, self).talk(message)
+        upd_resp = self.__update(happy_cnt, angry_cnt)
+
+        return dia_resp, upd_resp
+        
+
+    def __update(self, happy_cnt, angry_cnt):
+        '''
+        スコアを更新し、必要に応じてモードを変える
+        '''
         self.score += happy_cnt - angry_cnt
 
         if self.mode != HAPPY_MODE and self.score >= HAPPY_BOTTOM:
@@ -30,18 +45,9 @@ class AngrySiri(ReplAICommunicater):
         
         return None
 
-    '''
-    親クラスの関数たち
-    - change_topic(self, topic_id) # topic_idを変更してinit messageを送信
-    - talk(self, message)          # messageを送信
-    '''
-
 if __name__ == "__main__":
     ansi = AngrySiri()
     print('[メッセージ] [加算スコア]\nという形式で入力してね', flush=True)
     while True:
         mes, score = input().split(' ')
-        upd = ansi.update(int(score))
-        if upd != None:
-            print('==> ' + upd)
-        print('>>> ' + ansi.talk(mes))
+        print(ansi.talk(mes, int(score)))
