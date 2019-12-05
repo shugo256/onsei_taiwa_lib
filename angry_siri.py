@@ -1,3 +1,5 @@
+import sys
+sys.path.append('onsei_taiwa_lib')
 from config import *
 from repl_ai_communicator import ReplAICommunicater
 
@@ -8,6 +10,9 @@ ANGRY_MODE  = 2
 
 
 class AngrySiri(ReplAICommunicater):
+    '''
+    ReplAICommmunicaterにスコア機能を追加し、APIキーなどはconfig.pyから勝手に取得するようにしたクラス
+    '''
     def __init__(self):
         super(AngrySiri, self).__init__(API_KEY, BOT_ID)
         self.score = 0

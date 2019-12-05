@@ -48,7 +48,7 @@ class ReplAICommunicater:
         message = None の場合、initとして送信する
         '''
         if self.topic_id == None:
-            print("error: call init talk first!!!")
+            print("repl_ai_communicater error: call init_talk first!!!")
             exit(0)
         data = {
             "appUserId": self.app_user_id,
