@@ -9,7 +9,7 @@ from onsei_taiwa_lib.angry_siri import MultiAngrySiri
 # インスタンスの初期化、ユーザをAさん, Bさん, Cさんとする
 siri = MultiAngrySiri(['Aさん', 'Bさん', 'Cさん'])
 
-# 初期化メッセージを送信し、その返答を表示
+# 初期化メッセージの返答を表示
 print(siri.init_talks()) # => ふつうです
 
 # 発言者をAさんとしてカスというメッセージを送信し、angryポイントを1加算し、その返答を表示
