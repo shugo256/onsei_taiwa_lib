@@ -16,4 +16,4 @@ print(siri.talk('カス', angry_cnt=1)) # => ('せやな！', None)
 ```
 
 ## 設定
-`config.py`でAPIキーやボットID、スコアの上限値、下限値などAngrySiriクラスで用いる定数を変更できる。
+`config.py`でAPIキーやボットID、モード切替のためのスコアの上限値、下限値などAngrySiriクラスで用いる定数を変更できる。
