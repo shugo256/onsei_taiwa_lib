@@ -9,9 +9,12 @@ ANGRY_MODE  = 2
 
 class AngrySiri(ReplAICommunicater):
     def __init__(self):
-        super(AngrySiri, self).__init__(API_KEY, BOT_ID, NORMAL_TOPIC_ID)
+        super(AngrySiri, self).__init__(API_KEY, BOT_ID)
         self.score = 0
         self.mode = NORMAL_MODE
+
+    def init_talk(self, topic_id=NORMAL_TOPIC_ID):
+        return super(AngrySiri, self).init_talk(topic_id)
 
 
     def talk(self, message, happy_cnt=0, angry_cnt=0):
@@ -47,6 +50,7 @@ class AngrySiri(ReplAICommunicater):
 
 if __name__ == "__main__":
     ansi = AngrySiri()
+    print(ansi.init_talk())
     print('[メッセージ] [加算スコア]\nという形式で入力してね', flush=True)
     while True:
         mes, score = input().split(' ')

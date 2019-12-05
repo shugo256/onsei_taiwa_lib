@@ -12,12 +12,12 @@ class ReplAICommunicater:
     # args # 
         api_key : Repl-AIのAPIキー    (開発者についてunique)
         bot_id :    //   のボットID   (ボットについてunique)
-        topic_id:   //   のシナリオID (シナリオについてunique)
     '''
     
-    def __init__(self, api_key, bot_id, topic_id):
-        self.api_key = api_key
-        self.bot_id  = bot_id
+    def __init__(self, api_key, bot_id):
+        self.api_key  = api_key
+        self.bot_id   = bot_id
+        self.topic_id = None
 
         self.headers = {
             'Content-Type': 'application/json',
@@ -27,14 +27,11 @@ class ReplAICommunicater:
 
         register_resp = requests.post(REGISTERATION_URL, headers=self.headers, data=json.dumps(register_data))
         self.app_user_id = json.loads(register_resp.text)['appUserId']
-        
-        # __init__はreturnできないので、最初のmessageはiniit_textに苦し紛れに代入してる
-        self.init_text = self.change_topic(topic_id)
 
 
-    def change_topic(self, topic_id):
+    def init_talk(self, topic_id):
         '''
-        topic_idを変更して、initのメッセージを送る
+        topic_id(シナリオID)を変更して、initのメッセージを送る
         '''
         self.topic_id = topic_id
         return self.__post_dialogue()
@@ -50,6 +47,9 @@ class ReplAICommunicater:
         '''
         message = None の場合、initとして送信する
         '''
+        if self.topic_id == None:
+            print("error: call init talk first!!!")
+            exit(0)
         data = {
             "appUserId": self.app_user_id,
             "botId": self.bot_id,
