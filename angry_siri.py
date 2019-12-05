@@ -61,7 +61,7 @@ class AngrySiri(ReplAICommunicater):
 
 class MultiAngrySiri:
     '''
-    AngrySiriを複数人分保持する関数
+    AngrySiriを複数人分保持するクラス
     saveで保存したデータは、次回インスタンス生成時に復元される
     '''
     def __init__(self, user_list=[]):
