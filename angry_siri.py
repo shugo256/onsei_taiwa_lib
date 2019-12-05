@@ -41,15 +41,15 @@ class AngrySiri(ReplAICommunicater):
 
         if self.mode != HAPPY_MODE and self.score >= HAPPY_BOTTOM:
             self.mode = HAPPY_MODE
-            return self.change_topic(HAPPY_TOPIC_ID)
+            return self.init_talk(HAPPY_TOPIC_ID)
         
         elif self.mode != ANGRY_MODE and self.score <= ANGRY_TOP:
             self.mode = ANGRY_MODE
-            return self.change_topic(ANGRY_TOPIC_ID)
+            return self.init_talk(ANGRY_TOPIC_ID)
 
         elif self.mode != NORMAL_MODE and ANGRY_TOP < self.score < HAPPY_BOTTOM:
             self.mode = NORMAL_MODE
-            return self.change_topic(NORMAL_TOPIC_ID)
+            return self.init_talk(NORMAL_TOPIC_ID)
         
         return None
 
