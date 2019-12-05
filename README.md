@@ -3,7 +3,7 @@
 ## 使い方
 ```python3
 # import
-from onsei_taiwa_lib.angry_siri.py import AngrySiri
+from onsei_taiwa_lib.angry_siri import AngrySiri
 
 # インスタンスの初期化
 siri = AngrySiri()
