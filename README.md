@@ -16,7 +16,7 @@ print(siri.init_talks()) # => ふつうです
 print(siri.talk('Aさん', 'カス', angry_cnt=1)) # => ('せやな！', None)
 
 # Bさんのモードを取得
-print(siri.get_mode('Bさん'))
+print(siri.get_mode('Bさん')) # => normal
 ```
 
 ### AngrySiri
