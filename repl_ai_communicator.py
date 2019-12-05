@@ -54,10 +54,9 @@ class ReplAICommunicater:
             "appUserId": self.app_user_id,
             "botId": self.bot_id,
             "voiceText": message,
-            "initTalkingFlag": True,
+            "initTalkingFlag": (message == None),
             "initTopicId": self.topic_id
         }
-        data['initTalkingFlag'] = (message == None)
 
         if data['initTalkingFlag']:
             data['voiceText']   = 'init'
