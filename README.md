@@ -17,6 +17,9 @@ print(siri.talk('Aさん', 'カス', angry_cnt=1)) # => ('せやな！', None)
 
 # Bさんのモードを取得
 print(siri.get_mode('Bさん')) # => normal
+
+# (今回は使わないとおもうが)ユーザの動的追加
+siri.add_user('Dさん')
 ```
 
 ### AngrySiri
