@@ -26,7 +26,11 @@ class ReplAICommunicater:
         register_data = { "botId": self.bot_id }
 
         register_resp = requests.post(REGISTERATION_URL, headers=self.headers, data=json.dumps(register_data))
-        self.app_user_id = json.loads(register_resp.text)['appUserId']
+        try:
+            self.app_user_id = json.loads(register_resp.text)['appUserId']
+        except KeyError:
+            print('Repl-AI ERROR: ' + json.loads(register_resp.text)['message'])
+            exit(0)
 
 
     def init_talk(self, topic_id):
@@ -62,7 +66,11 @@ class ReplAICommunicater:
             data['voiceText']   = 'init'
             data['initTopicId'] = self.topic_id
 
+        
         resp = requests.post(DIALOGUE_URL, headers=self.headers, data=json.dumps(data))
+        if not 'systemText' in resp.text:
+            print('Repl-AI ERROR: ' + json.loads(resp.text)['message'])
+            exit(0)
 
         return json.loads(resp.text)['systemText']['expression']
         
@@ -70,6 +78,7 @@ class ReplAICommunicater:
         
 
 if __name__ == "__main__":
-    dial = ReplAICommunicater('ZUQZEcApTGtAZySTmTYw2PmMEFDG143eNW5v5ovv', "b4wto1xmcc9w0fr", "s4wto2460oo80ny")
+    dial = ReplAICommunicater('ZUQZEcApTGtAZySTmTYw2PmMEFDG143eNW5v5ovv', "b4wto1xmcc9w0fr")
+    dial.init_talk("s4wto2460oo80ny")
     while True:
-        dial.talk(input())
+        print(dial.talk(input()))
