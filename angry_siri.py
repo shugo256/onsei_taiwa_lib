@@ -59,17 +59,19 @@ class AngrySiri(ReplAICommunicater):
         return None
 
 
-class MultiAngrySiri:
+class MultiAngrySiri(dict):
     '''
     AngrySiriを複数人分保持するクラス
     saveで保存したデータは、次回インスタンス生成時に復元される
     '''
-    def __init__(self, user_list=[]):
-        if os.path.exists(PICKLE_PATH):
+    def __init__(self, user_list=[], load_pickle=True):
+        if load_pickle and os.path.exists(PICKLE_PATH):
             with open(PICKLE_PATH, 'rb') as f:
-                self.siri_dict, self.init_normal_resp = pickle.load(f)
+                loaded_siri = pickle.load(f)
+                print(loaded_siri)
+            self.__dict__.update(loaded_siri.__dict__)
+            self.update(loaded_siri)
         else:
-            self.siri_dict = dict()
             self.init_normal_resp = None
         for user in user_list:
             self.add_user(user)
@@ -78,20 +80,20 @@ class MultiAngrySiri:
         return self.init_normal_resp
     
     def talk(self, target, message, happy_cnt, angry_cnt):
-        return self.siri_dict[target].talk(message, happy_cnt, angry_cnt)
+        return self[target].talk(message, happy_cnt, angry_cnt)
 
     def get_mode(self, target):
         ans = ['normal', 'happy', 'angry']
-        return ans[self.siri_dict[target].mode]
+        return ans[self[target].mode]
     
     def add_user(self, username):
-        if not username in self.siri_dict:
-            self.siri_dict[username] = AngrySiri()
-        self.init_normal_resp = self.siri_dict[username].init_talk()
+        if not username in self:
+            self[username] = AngrySiri()
+        self.init_normal_resp = self[username].init_talk()
 
     def save(self):
         with open(PICKLE_PATH, 'wb') as f:
-            pickle.dump((self.siri_dict, self.init_normal_resp), f)
+            pickle.dump(self, f)
 
 if __name__ == "__main__":
     # ansi = AngrySiri()
@@ -102,8 +104,9 @@ if __name__ == "__main__":
     #     print(ansi.talk(mes, int(score)))
 
     os.chdir('..')
-    masi = MultiAngrySiri(['Taro', 'Unko'])
+    masi = MultiAngrySiri(['Taro', 'Unko'], load_pickle=True)
     masi.save()
     masi2 = MultiAngrySiri()
     masi2.talk('Unko', 'カス', happy_cnt=30, angry_cnt=0)
+    print(masi2['Unko'].score)
     print(masi2.get_mode('Unko'), masi2.get_mode('Taro'))
