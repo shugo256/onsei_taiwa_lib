@@ -1,5 +1,9 @@
 # OnseiTaiwaLib
 
+3Aの実験「音声対話システム」で書いたもの
+
+Repl-AIのAPIを叩きつついろいろやる（語彙力）
+
 ## 使い方
 ### AngrySiri
 ```python3
