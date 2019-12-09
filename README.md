@@ -24,6 +24,9 @@ from onsei_taiwa_lib.angry_siri import MultiAngrySiri
 # インスタンスの初期化、ユーザをAさん, Bさん, Cさんとする
 siri = MultiAngrySiri(['Aさん', 'Bさん', 'Cさん'])
 
+# ユーザーデータをロードせずに使う場合
+siri = MultiAngrySiri(['Aさん', 'Bさん', 'Cさん'], load_pickle=False)
+
 # 初期化メッセージの返答を表示
 print(siri.init_talks()) # => ふつうです
 
