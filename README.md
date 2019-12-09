@@ -35,6 +35,12 @@ print(siri.get_mode('Bさん')) # => normal
 
 # (今回は使わないとおもうが)ユーザの動的追加
 siri.add_user('Dさん')
+
+# 中断時の保存
+try:
+  ...
+except KeyboardInterrupt:
+    siri.save()
 ```
 
 ## 設定
