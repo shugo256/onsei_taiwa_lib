@@ -72,7 +72,6 @@ class MultiAngrySiri(dict):
         if load_pickle and os.path.exists(PICKLE_PATH):
             with open(PICKLE_PATH, 'rb') as f:
                 loaded_siri = pickle.load(f)
-                print(loaded_siri)
             self.__dict__.update(loaded_siri.__dict__)
             self.update(loaded_siri)
         else:
