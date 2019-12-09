@@ -30,8 +30,12 @@ print(siri.init_talks()) # => ふつうです
 # 発言者をAさんとしてカスというメッセージを送信し、angryポイントを1加算し、その返答を表示
 print(siri.talk('Aさん', 'カス', angry_cnt=1)) # => ('せやな！', None)
 
-# Bさんのモードを取得
+# Bさんのモード、スコアを取得
 print(siri.get_mode('Bさん')) # => normal
+print(siri['Bさん'].score)    # => 10
+# こういう感じでsiri[username]とすればuserに対応するAngrySiriオブジェクトにアクセスできるので、
+# たとえば上のtalk関数は
+siri['Aさん'].talk('カス', angry_cnt=1) # でもよい
 
 # (今回は使わないとおもうが)ユーザの動的追加
 siri.add_user('Dさん')
