@@ -44,6 +44,10 @@ class AngrySiri(ReplAICommunicater):
         '''
         self.score += happy_cnt - angry_cnt
 
+        # でかくなりすぎない & 小さくなりすぎないようにする
+        self.score = min(self.score,  LIMMIT)
+        self.score = max(self.score, -LIMMIT)
+
         if self.mode != HAPPY_MODE and self.score >= HAPPY_BOTTOM:
             self.mode = HAPPY_MODE
             return self.init_talk(HAPPY_TOPIC_ID)
@@ -108,5 +112,6 @@ if __name__ == "__main__":
     masi.save()
     masi2 = MultiAngrySiri()
     masi2.talk('Unko', 'カス', happy_cnt=30, angry_cnt=0)
-    print(masi2['Unko'].score)
+    masi2.talk('Taro', 'カス', happy_cnt=0, angry_cnt=30)
+    print(masi2['Unko'].score, masi2['Taro'].score)
     print(masi2.get_mode('Unko'), masi2.get_mode('Taro'))

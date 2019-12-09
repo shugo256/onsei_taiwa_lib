@@ -8,8 +8,11 @@ HAPPY_TOPIC_ID  = 's4wvgsrfqyi60ny'
 ANGRY_TOPIC_ID  = 's4ww2xmwo8r20ny'
 
 # それぞれのモードに移行するスコアの境界値
-ANGRY_TOP    = -10 # この値以下のとき、Angry モード
-HAPPY_BOTTOM =  10 # この値以上のとき、Happy もーど
+THRESH = 2 
+
+LIMMIT = THRESH * 2    # scoreの絶対値はこの値を超えない（超えた分はノーカン）
+ANGRY_TOP    = -THRESH # この値以下のとき、Angry モード
+HAPPY_BOTTOM =  THRESH # この値以上のとき、Happy もーど
 
 # ユーザデータを格納しておくpickleのパス
 PICKLE_PATH = 'onsei_taiwa_lib/user_data.pkl'
